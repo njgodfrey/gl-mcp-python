@@ -24,14 +24,16 @@ gl-mcp-python/
 │   ├── __init__.py
 │   ├── main.py           # FastAPI app entrypoint
 │   ├── config.py         # Pydantic settings
-│   ├── providers/        # MCP tool providers
+│   ├── mcp/              # MCP protocol implementation
 │   │   ├── __init__.py
-│   │   ├── news.py       # GL News provider (TODO)
-│   │   ├── jira.py       # JIRA provider (TODO)
-│   │   ├── vault.py      # Vault provider (TODO)
-│   │   └── admin.py      # Admin provider (TODO)
-│   ├── auth/             # Keycloak auth (TODO)
-│   └── mcp/              # MCP protocol (TODO)
+│   │   ├── server.py     # MCP server manager & tool registration
+│   │   └── transport.py  # SSE/Streamable HTTP transport
+│   └── providers/        # MCP tool providers
+│       ├── __init__.py
+│       ├── base.py       # BaseProvider class & registry
+│       ├── jira.py       # JIRA provider (implemented)
+│       ├── news.py       # GL News provider (TODO)
+│       └── vault.py      # Vault provider (TODO)
 ├── tests/
 ├── Dockerfile
 ├── docker-compose.yml
@@ -75,12 +77,12 @@ Copy `.env.example` to `.env` and fill in the values. Key variables:
 
 - [x] Project scaffold
 - [x] Health check endpoint
-- [ ] MCP protocol implementation (GL-273)
+- [x] MCP protocol implementation (GL-273)
+- [x] Provider architecture (base class, registry)
+- [x] JIRA provider (search, get, create, comment, transition)
 - [ ] Keycloak OAuth integration (GL-274)
 - [ ] News provider
-- [ ] JIRA provider
 - [ ] Vault provider
-- [ ] Admin provider
 - [ ] ECS deployment (GL-279)
 
 ## Related JIRA Tickets
