@@ -1,0 +1,12 @@
+services:
+  gl-mcp:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src:ro
+    environment:
+      - LOG_LEVEL=debug
+    restart: unless-stopped
